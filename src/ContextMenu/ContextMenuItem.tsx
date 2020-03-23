@@ -10,10 +10,9 @@ import { IContextMenuItem } from "./IContextMenuItem";
 
 export class ContextMenuItem extends Component<IContextMenuItemProps> {
   onClick = (event: React.MouseEvent) => {
-    const { onClick, disabled, divider, model } = this.props;
+    const { onClick, disabled, divider } = this.props;
     if (disabled || divider) return;
     if (onClick) onClick(this.props as IContextMenuItem, event);
-    if (model) model.emit("click", this.props, event);
   };
 
   renderShortcut() {

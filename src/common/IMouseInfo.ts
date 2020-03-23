@@ -1,4 +1,4 @@
 export interface IMouseInfo {
-  clientX: number,
-  clientY: number
+  clientX: number;
+  clientY: number;
 }

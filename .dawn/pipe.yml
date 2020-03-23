@@ -1,5 +1,36 @@
-init:
-  - name: pkginfo
+webpack: &webpack
+  babel:
+    modules: false
+    useBuiltIns: false
+    transform: false
+  umd:
+    library: cmenu
+    libraryTarget: umd
+    umdNamedDefine: true
+  common:
+    disabled: true
+  external: true
+  externals:
+    react: 
+      commonjs: react
+      commonjs2: react
+      root: React
+    react-dom: 
+      commonjs: react-dom
+      commonjs2: react-dom
+      root: ReactDOM
+    mota: 
+      commonjs: mota
+      commonjs2: mota
+      root: Mota
+    mota-touch: 
+      commonjs: mota-touch
+      commonjs2: mota-touch
+      root: MotaTouch
+    util: 
+      commonjs: util
+      commonjs2: util
+      root: Util
 
 dev:
   - name: clean
@@ -30,10 +61,12 @@ build:
       - types
   - name: typescript
   - name: webpack
+    <<: *webpack
     output: ./dist/
     common:
       disabled: true
     template: none
+    compress: false
 
 test:
   - name: clean

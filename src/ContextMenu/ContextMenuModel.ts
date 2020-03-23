@@ -5,10 +5,9 @@
 
 import { ContextMenuItems, IContextMenuItem } from "./IContextMenuItem";
 import { IMouseInfo } from "../common/IMouseInfo";
-import { EventEmitter } from "events";
 import { isArray } from "util";
 
-export class ContextMenuModel extends EventEmitter {
+export class ContextMenuModel {
   protected static __instances: ContextMenuModel[] = [];
   public static get instances() {
     return this.__instances;
@@ -20,7 +19,6 @@ export class ContextMenuModel extends EventEmitter {
   protected factory: ContextMenuItems;
 
   constructor(factory: ContextMenuItems) {
-    super();
     this.factory = factory;
     ContextMenuModel.instances.push(this);
   }
