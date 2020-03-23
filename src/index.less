@@ -1,0 +1,103 @@
+/**
+ * Copyright (c) 2019-present Houfeng
+ * @author Houfeng <admin@xhou.net>
+ */
+
+.menu {
+  @color: #333;
+  cursor: default;
+  color: @color;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .25);
+  transform: translate3d(0, 0, 0);
+  outline: none;
+  user-select: none;
+  text-align: left;
+  font-size: 14px;
+  list-style-type: none;
+  margin: 0;
+  padding: 4px 0;
+  position: fixed;
+  z-index: 999999;
+  min-width: 180px;
+  animation: show .3s ease;
+
+  @keyframes show {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  &>li {
+    position: relative;
+    list-style-type: none;
+    transition-duration: 50ms;
+    @hieght: 28px;
+    height: @hieght;
+    line-height: @hieght;
+    padding: 0 16px;
+
+    &.children::after {
+      content: "▶";
+      font-family: 'Courier New', Courier, monospace;
+      display: inline-block;
+      position: absolute;
+      right: 8px;
+      color: #666;
+      pointer-events: none;
+    }
+
+    &>.menu {
+      position: absolute;
+      display: none;
+    }
+
+    &:not(.disabled):hover {
+      background-color: #20a0ff;
+      text-decoration: none;
+      outline: none;
+
+      &,
+      &::after,
+      .shortcut {
+        color: #fff;
+      }
+
+      &>.menu {
+        display: block;
+        top: 0;
+        left: 100%;
+        color: @color;
+      }
+    }
+
+    &.disabled {
+
+      &,
+      &::after,
+      .shortcut {
+        color: #aaa;
+      }
+    }
+
+    &.divider {
+      padding: 0;
+      border-bottom: 1px solid #eee;
+      height: 0;
+      line-height: 0;
+      margin: 4px 0;
+    }
+
+    .shortcut {
+      float: right;
+      color: #666;
+      pointer-events: none;
+    }
+
+  }
+}

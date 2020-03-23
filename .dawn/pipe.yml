@@ -1,0 +1,50 @@
+init:
+  - name: pkginfo
+
+dev:
+  - name: clean
+    target: 
+      - build
+      - debug
+      - dist
+      - types
+  - name: typescript
+  - name: webpack
+    output: ./debug/
+    common:
+      disabled: true
+    entry: ./examples/*.tsx
+    template: ./assets/*.html
+    watch: true
+  - name: server
+    port: 7008
+    public: ./debug
+  - name: browser-sync
+
+build:
+  - name: clean
+    target: 
+      - build
+      - debug
+      - dist
+      - types
+  - name: typescript
+  - name: webpack
+    output: ./dist/
+    common:
+      disabled: true
+    template: none
+
+test:
+  - name: clean
+  - name: tslint
+  - name: unit
+
+publish:
+  - name: version
+  - name: shell
+    script:
+      - dn test
+      - dn build
+      - npm pu --registry=http://registry.npmjs.org
+  - name: submitter
