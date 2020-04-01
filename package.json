@@ -1,6 +1,6 @@
 {
   "name": "cmenu",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
@@ -32,6 +32,7 @@
     "dn-middleware-unit": "^0.1.18",
     "dn-middleware-version": "^1.0.4",
     "dn-middleware-webpack": "^1.10.1",
+    "styled-components": "^5.0.1",
     "typescript": "3.7.5"
   },
   "peerDependencies": {
@@ -39,7 +40,7 @@
     "react-dom": "^16.8.4"
   },
   "dependencies": {
-    "mota": "^4.0.6",
-    "mota-touch": "^1.3.6"
+    "mota": "^4.2.2",
+    "mota-touch": "^1.4.1"
   }
 }
