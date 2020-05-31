@@ -1,6 +1,6 @@
 {
   "name": "cmenu",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
@@ -40,7 +40,7 @@
     "react-dom": "^16.8.4"
   },
   "dependencies": {
-    "mota": "^4.2.2",
-    "mota-touch": "^1.4.1"
+    "mota": "^6.2.4",
+    "mota-touch": "^2.0.5"
   }
 }
