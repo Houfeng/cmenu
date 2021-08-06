@@ -3,21 +3,22 @@
  * @author Houfeng <admin@xhou.net>
  */
 
+import { EventProxy, GestureEvent, gesture } from "mota-gesture";
 import React, { Component } from "react";
-import { createPortal } from "react-dom";
+
+import { ContextMenuList } from "./ContextMenuList";
+import { ContextMenuModel } from "./ContextMenuModel";
 import { ContextMenuOwner } from "./ContextMenuOwner";
 import { IContextMenuProps } from "./IContextMenuProps";
+import { createPortal } from "react-dom";
 import { model } from "mota";
-import { ContextMenuModel } from "./ContextMenuModel";
-import { EventProxy, touch } from "mota-touch";
-import { ContextMenuList } from "./ContextMenuList";
 
 @model
-@touch
+@gesture
 export class ContextMenu extends Component<IContextMenuProps> {
   model: ContextMenuModel;
 
-  onDocMouseDown = (event: React.MouseEvent<Document>) => {
+  onDocumentPointerDown = (event: GestureEvent) => {
     const target = event.target as HTMLLIElement;
     if (target.getAttribute("data-prevent") === "true" || event.button !== 0) {
       return;
@@ -25,7 +26,7 @@ export class ContextMenu extends Component<IContextMenuProps> {
     return setTimeout(() => this.model.hide(), 150);
   };
 
-  onDocContextMenu = (event: React.MouseEvent<Document>) => {
+  onDocumentContextMenu = (event: React.MouseEvent<Document>) => {
     const target = event.target as HTMLLIElement;
     if (target.getAttribute("data-prevent") === "true") return;
     this.model.hide();
@@ -35,15 +36,9 @@ export class ContextMenu extends Component<IContextMenuProps> {
     const { position, items } = this.model;
     const { children } = this.props;
     return (
-      <React.Fragment>
-        <ContextMenuList model={this.model} position={position} items={items}>
-          {children}
-        </ContextMenuList>
-        <EventProxy
-          onMouseDown={this.onDocMouseDown}
-          onContextMenu={this.onDocContextMenu}
-        />
-      </React.Fragment>
+      <ContextMenuList model={this.model} position={position} items={items}>
+        {children}
+      </ContextMenuList>
     );
   }
 
@@ -57,6 +52,14 @@ export class ContextMenu extends Component<IContextMenuProps> {
   render() {
     const { visible } = this.model;
     if (!visible) return <React.Fragment />;
-    return createPortal(this.renderMenu(), this.owner.container);
+    return (
+      <React.Fragment>
+        <EventProxy
+          onGesturePointerDown={this.onDocumentPointerDown}
+          onContextMenu={this.onDocumentContextMenu}
+        />
+        {createPortal(this.renderMenu(), this.owner.container)}
+      </React.Fragment>
+    );
   }
 }
